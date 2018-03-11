@@ -45,15 +45,15 @@ TEST(Huffman, createHuffmanTree)
 
 TEST(Huffman, createHuffmanHashTable)
 {
-    std::map<char, std::string> huffManHasTable;
-    const std::string INPUT = "aaabbbcccewqodapqowdsa";
-    auto dict = createCharToFreqDictionary(INPUT);
-    auto* huffmanTree = createHuffmanTree(dict);
-    createHuffmanHashTable(huffmanTree, huffManHasTable, "");
-    std::cout << "Huffman HashTable" << std::endl;
-    for(auto it = huffManHasTable.begin(); it != huffManHasTable.end(); ++it)
-    {
-        std::cout << it->first << " : " << it->second << std::endl;
-    }
+    // std::map<char, std::string> huffManHasTable;
+    // const std::string INPUT = "aaabbbcccewqodapqowdsa";
+    // auto dict = createCharToFreqDictionary(INPUT);
+    // auto* huffmanTree = createHuffmanTree(dict);
+    // createHuffmanHashTable(huffmanTree, huffManHasTable, "");
+    // std::cout << "Huffman HashTable" << std::endl;
+    // for(auto it = huffManHasTable.begin(); it != huffManHasTable.end(); ++it)
+    // {
+    //     std::cout << it->first << " : " << it->second << std::endl;
+    // }
     SUCCEED();
 }

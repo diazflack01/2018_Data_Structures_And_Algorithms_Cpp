@@ -36,19 +36,19 @@ Node* createHuffmanTree(std::vector<Node*>& charToFreqDict)
 
 void createHuffmanHashTable(Node* huffmanTree, std::map<char, std::string>& mm, std::string s)
 {
-    if(huffmanTree->left != nullptr)
-    {
-        createHuffmanHashTable(huffmanTree->left, mm, s+"0");
-    }
-    if(huffmanTree->right != nullptr)
-    {
-        createHuffmanHashTable(huffmanTree->right, mm, s+"1");
-    }
-    if(huffmanTree->left == nullptr && huffmanTree->right == nullptr)
-    {
-        // std::cout << huffmanTree->ch << " : " << s << std::endl;
-        mm.insert(std::make_pair(huffmanTree->ch, s));
-    }
+    // if(huffmanTree->left != nullptr)
+    // {
+    //     createHuffmanHashTable(huffmanTree->left, mm, s+"0");
+    // }
+    // if(huffmanTree->right != nullptr)
+    // {
+    //     createHuffmanHashTable(huffmanTree->right, mm, s+"1");
+    // }
+    // if(huffmanTree->left == nullptr && huffmanTree->right == nullptr)
+    // {
+    //     // std::cout << huffmanTree->ch << " : " << s << std::endl;
+    //     mm.insert(std::make_pair(huffmanTree->ch, s));
+    // }
 }
 
 void printCodes(Node* huffmanTree, std::string s)
