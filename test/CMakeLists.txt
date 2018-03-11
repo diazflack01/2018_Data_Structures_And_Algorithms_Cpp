@@ -15,6 +15,7 @@ add_executable(algorithm_test
 	"${SRC_DIR}/SortAlgo/MergeSort.cpp"
 	"${SRC_DIR}/SortAlgo/QuickSort.cpp"
 	"${SRC_DIR}/SortAlgo/ShellSort.cpp"
+	"${SRC_DIR}/CompressionAlgo/Huffman.cpp"
 	)
 
 target_link_libraries(algorithm_test gtest gmock pthread)

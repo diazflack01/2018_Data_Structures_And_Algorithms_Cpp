@@ -9,6 +9,7 @@
 #include <SortAlgo/TestMergeSort.cpp>
 #include <SortAlgo/TestQuickSort.cpp>
 #include <SortAlgo/TestShellSort.cpp>
+#include <CompressionAlgo/TestHuffman.cpp>
 
 int main(int argc, char **argv)
 {
