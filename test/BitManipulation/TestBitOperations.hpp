@@ -46,7 +46,7 @@ TEST(BitManipulation, subtraction)
 	EXPECT_EQ(8, subtract(3,-5));
 }
 
-TEST(BitManipulation, mutiply)
+TEST(BitManipulation, multiply)
 {
 	EXPECT_EQ(1, multiply(1,1));
 	EXPECT_EQ(6, multiply(2,3));
