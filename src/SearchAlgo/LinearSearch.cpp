@@ -3,12 +3,12 @@
 
 int linearSearch(const int arr[], const int sizeOfArr, const int searchItem)
 {
-	int idxPos = -1;
-
-	return idxPos;
+	
+	return -1;
 }
 
 int linearSearchVector(const std::vector<int>& vecArr, const int searchItem)
 {
+	
 	return -1;
 }

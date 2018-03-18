@@ -10,6 +10,7 @@
 #include <SortAlgo/TestQuickSort.cpp>
 #include <SortAlgo/TestShellSort.cpp>
 #include <CompressionAlgo/TestHuffman.cpp>
+#include <BitManipulation/TestBitOperations.hpp>
 
 int main(int argc, char **argv)
 {

@@ -4,14 +4,10 @@
 
 int binarySearch(const int arr[], const int sizeOfArr /*endIndex + 1*/, const int searchItem)
 {
-	int idxPos = -1;
-
-	return idxPos;
+	return -1;
 }
 
 int binarySearchVector(const std::vector<int>& vecArr, const int searchItem)
 {
-	int idxPos = -1;
-
-	return idxPos;
+	return -1;
 }
