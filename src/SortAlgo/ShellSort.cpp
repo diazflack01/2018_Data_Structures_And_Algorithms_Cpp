@@ -31,19 +31,5 @@ void ShellSort::sort(unsigned arr[], const unsigned arrLen /*endIndex + 1*/)
     // }
 
     // SOLUTION 2 --> Gap recursively divided into 2 while Gap > 0
-    for(auto gap = arrLen/2; gap > 0; gap/=2)
-    {
-        auto interval = gap;
-        for(auto outer = interval; outer < arrLen; outer++)
-        {
-            auto inner = outer;
-            auto valueToBeInserted = arr[inner];
-            while(inner > interval-1 && arr[inner-interval] >= valueToBeInserted)
-            {
-                arr[inner] = arr[inner-interval];
-                inner -= interval;
-            }
-            arr[inner] = valueToBeInserted;
-        }
-    }
+
 }

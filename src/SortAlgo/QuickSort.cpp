@@ -13,7 +13,7 @@ unsigned partition(unsigned arr[], const unsigned start, const unsigned end)
 
 
     // 2B --> PIVOT is highest index
-    
+    return -1;
 }
 
 void quickSort(unsigned arr[], const int start, const int end)
