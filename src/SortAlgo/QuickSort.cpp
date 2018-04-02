@@ -20,9 +20,7 @@ void quickSort(unsigned arr[], const int start, const int end)
 {
     if(start < end)
     {
-        int pivotPosition = partition(arr, start, end);
-        quickSort(arr, start, pivotPosition-1);
-        quickSort(arr, pivotPosition+1, end);
+
     }
 }
 

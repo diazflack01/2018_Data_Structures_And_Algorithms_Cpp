@@ -11,6 +11,7 @@
 #include <SortAlgo/TestShellSort.cpp>
 #include <CompressionAlgo/TestHuffman.cpp>
 #include <BitManipulation/TestBitOperations.hpp>
+#include <Tree/TestBinaryTree.cpp>
 
 int main(int argc, char **argv)
 {
