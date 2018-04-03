@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
+#include <cstring>
+#include <array>
 
 namespace Tree {
 template<typename T>
@@ -36,6 +39,11 @@ public:
 
 	// Other
 	int height();
+	void mirrorTree();
+	int diameter();
+	bool isFoldable();
+	std::vector<T> nodeValuesKDistant(unsigned k);
+	int getMaxWidth();
 
 	Tree::Node<T>* getRootNode() const;
 
@@ -56,6 +64,11 @@ protected:
 
 	//Other
 	int height(Tree::Node<T>* node);
+	void mirrorTree(Tree::Node<T>* node);
+	int diameter(Tree::Node<T>* node);
+	bool isFoldableRecursive(Tree::Node<T>* leftNode, Tree::Node<T>* rightNode);
+	void nodeValuesKDistant(std::vector<T>& container, Tree::Node<T>* node, unsigned k);
+	void getMaxWidth(Tree::Node<T>* node, int count[], int level);
 
 	Tree::Node<T>* root;
 };
@@ -327,4 +340,133 @@ bool BinaryTree<T>::isTreeBst(BinaryTree<T>& binaryTree)
 	}
 
 	return true;
+}
+
+template<typename T>
+void BinaryTree<T>::mirrorTree()
+{
+	if(nullptr != root)
+	{
+		mirrorTree(root);
+	}
+}
+
+template<typename T>
+void BinaryTree<T>::mirrorTree(Tree::Node<T>* node)
+{
+	if(nullptr == node)
+		return;
+
+	mirrorTree(node->left);
+	mirrorTree(node->right);
+
+	auto temp = node->left;
+	node->left = node->right;
+	node->right = temp;
+}
+
+template<typename T>
+int BinaryTree<T>::diameter()
+{
+	if(nullptr != root)
+		return diameter(root);
+	return 0;
+}
+
+template<typename T>
+int BinaryTree<T>::diameter(Tree::Node<T>* node)
+{
+	if(nullptr == node)
+		return 0;
+
+	int leftHeight = height(node->left)+1;
+	int rightHeight = height(node->right)+1;
+
+	int leftDiameter = diameter(node->left);
+	int rightDiameter = diameter(node->right);
+
+	return std::max(leftHeight+rightHeight+1, std::max(leftDiameter, rightDiameter));
+}
+
+template<typename T>
+bool BinaryTree<T>::isFoldable()
+{
+	if(nullptr == root)
+		return true;
+
+	return isFoldableRecursive(root->left, root->right);
+}
+
+template<typename T>
+bool BinaryTree<T>::isFoldableRecursive(Tree::Node<T>* leftNode, Tree::Node<T>* rightNode)
+{
+	if(nullptr == leftNode && nullptr == rightNode)
+		return true;
+
+	if(nullptr == leftNode || nullptr == rightNode)
+		return false;
+
+	return isFoldableRecursive(leftNode->left, leftNode->right)
+			&& isFoldableRecursive(rightNode->left, rightNode->right);
+}
+
+template<typename T>
+std::vector<T> BinaryTree<T>::nodeValuesKDistant(unsigned k)
+{
+	std::vector<T> nodesAtKDistant;
+	if(nullptr != root)
+		nodeValuesKDistant(nodesAtKDistant, root, k);
+	return nodesAtKDistant;
+}
+
+template<typename T>
+void BinaryTree<T>::nodeValuesKDistant(std::vector<T>& container, Tree::Node<T>* node, unsigned k)
+{
+	if(nullptr == node)
+		return;
+
+	if(0 == k--)
+	{
+		container.push_back(node->data);
+	}
+	else
+	{
+		nodeValuesKDistant(container, node->left, k);
+		nodeValuesKDistant(container, node->right, k);
+	}
+}
+
+template<typename T>
+int BinaryTree<T>::getMaxWidth()
+{
+	if(nullptr == root)
+		return -1;
+
+	int h = height()+1; // height method with bug
+
+	int* count = new int[h];
+	std::memset(count, 0, h*sizeof(int));
+	int level = 0;
+
+	getMaxWidth(root, count, level);
+
+	int max = 0;
+	for(auto i = 0; i < h; ++i)
+	{
+		if(max < count[i])
+			max = count[i];
+	}
+
+	return max;
+}
+
+template<typename T>
+void BinaryTree<T>::getMaxWidth(Tree::Node<T>* node, int count[], int level)
+{
+	if(nullptr == node)
+		return;
+
+	count[level++]++;
+	getMaxWidth(node->left, count, level);
+	getMaxWidth(node->right, count, level);
 }

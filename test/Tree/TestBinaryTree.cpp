@@ -200,3 +200,116 @@ TEST(TestBinaryTree, isTreeBst_mixTest) //THIS TEST WILL ALWAYS PASS!!!
 	}
 }
 
+TEST(TestBinaryTree, mirrorTree)
+{
+	std::vector<int> TEST_INPUT = {69, 55, 69, 49, 45, 75, 99, 75};
+	std::vector<int> TEST_OUTPUT_LEVELORDER = {69, 55, 75, 49, 69, 75, 99, 45};
+	std::vector<int> TEST_OUTPUT_LEVELORDER_MIRROR = {69, 75, 55, 99, 75, 69, 49, 45};
+	BinaryTree<int> binaryTree;
+
+	for(auto&& e : TEST_INPUT)
+		binaryTree.insert(e);
+
+	auto actualLevelOderTraversalOutput = binaryTree.levelOrderTraversalWithRet();
+	ASSERT_EQ(TEST_OUTPUT_LEVELORDER.size(), actualLevelOderTraversalOutput.size());
+	for(auto i = 0u; i < TEST_OUTPUT_LEVELORDER.size(); ++i)
+		EXPECT_EQ(TEST_OUTPUT_LEVELORDER[i], actualLevelOderTraversalOutput[i]);
+
+	binaryTree.mirrorTree();
+	actualLevelOderTraversalOutput = binaryTree.levelOrderTraversalWithRet();
+	ASSERT_EQ(TEST_OUTPUT_LEVELORDER_MIRROR.size(), actualLevelOderTraversalOutput.size());
+	for(auto i = 0u; i < TEST_OUTPUT_LEVELORDER_MIRROR.size(); ++i)
+		EXPECT_EQ(TEST_OUTPUT_LEVELORDER_MIRROR[i], actualLevelOderTraversalOutput[i]);
+
+	binaryTree.mirrorTree();
+	actualLevelOderTraversalOutput = binaryTree.levelOrderTraversalWithRet();
+	ASSERT_EQ(TEST_OUTPUT_LEVELORDER.size(), actualLevelOderTraversalOutput.size());
+	for(auto i = 0u; i < TEST_OUTPUT_LEVELORDER.size(); ++i)
+		EXPECT_EQ(TEST_OUTPUT_LEVELORDER[i], actualLevelOderTraversalOutput[i]);
+}
+
+TEST(TestBinaryTree, diameter)
+{
+	std::vector<int> TEST_INPUT = {69, 55, 69, 49, 45, 75, 99, 75};
+	BinaryTree<int> binaryTree;
+
+	ASSERT_EQ(0, binaryTree.diameter());
+
+	for(auto&& e : TEST_INPUT)
+		binaryTree.insert(e);
+
+	ASSERT_EQ(6, binaryTree.diameter());
+}
+
+TEST(TestBinaryTree, isFoldable)
+{
+	BinaryTree<int> binaryTree;
+
+	EXPECT_TRUE(binaryTree.isFoldable());
+	binaryTree.insert(69);
+	EXPECT_TRUE(binaryTree.isFoldable());
+	binaryTree.insert(55);
+	EXPECT_FALSE(binaryTree.isFoldable());
+	binaryTree.insert(70);
+	EXPECT_TRUE(binaryTree.isFoldable());
+}
+
+TEST(TestBinaryTree, nodeValuesKDistant)
+{
+	std::vector<int> TEST_INPUT = {69, 55, 69, 49, 45, 75, 99, 75};
+	BinaryTree<int> binaryTree;
+
+	auto nodesWithKDistance = binaryTree.nodeValuesKDistant(0);
+	ASSERT_EQ(0, nodesWithKDistance.size());
+	nodesWithKDistance = binaryTree.nodeValuesKDistant(1);
+	ASSERT_EQ(0, nodesWithKDistance.size());
+	nodesWithKDistance = binaryTree.nodeValuesKDistant(69);
+	ASSERT_EQ(0, nodesWithKDistance.size());
+
+	for(auto&& e : TEST_INPUT)
+		binaryTree.insert(e);
+
+	nodesWithKDistance = binaryTree.nodeValuesKDistant(0);
+	ASSERT_EQ(1, nodesWithKDistance.size());
+	EXPECT_EQ(69, nodesWithKDistance[0]);
+
+	nodesWithKDistance = binaryTree.nodeValuesKDistant(1);
+	ASSERT_EQ(2, nodesWithKDistance.size());
+	EXPECT_EQ(55, nodesWithKDistance[0]);
+	EXPECT_EQ(75, nodesWithKDistance[1]);
+
+	nodesWithKDistance = binaryTree.nodeValuesKDistant(2);
+	ASSERT_EQ(4, nodesWithKDistance.size());
+	EXPECT_EQ(49, nodesWithKDistance[0]);
+	EXPECT_EQ(69, nodesWithKDistance[1]);
+	EXPECT_EQ(75, nodesWithKDistance[2]);
+	EXPECT_EQ(99, nodesWithKDistance[3]);
+
+	nodesWithKDistance = binaryTree.nodeValuesKDistant(3);
+	ASSERT_EQ(1, nodesWithKDistance.size());
+	EXPECT_EQ(45, nodesWithKDistance[0]);
+}
+
+TEST(TestBinaryTree, getMaxWidth)
+{
+	std::vector<int> TEST_INPUT = {69, 55, 69, 49, 45, 75, 99, 75};
+	BinaryTree<int> binaryTree;
+
+	ASSERT_EQ(-1, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[0]);
+	ASSERT_EQ(1, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[1]);
+	ASSERT_EQ(1, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[2]);
+	ASSERT_EQ(1, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[3]);
+	ASSERT_EQ(2, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[4]);
+	ASSERT_EQ(2, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[5]);
+	ASSERT_EQ(2, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[6]);
+	ASSERT_EQ(3, binaryTree.getMaxWidth());
+	binaryTree.insert(TEST_INPUT[7]);
+	ASSERT_EQ(4, binaryTree.getMaxWidth());
+}
