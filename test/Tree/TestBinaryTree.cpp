@@ -313,3 +313,81 @@ TEST(TestBinaryTree, getMaxWidth)
 	binaryTree.insert(TEST_INPUT[7]);
 	ASSERT_EQ(4, binaryTree.getMaxWidth());
 }
+
+TEST(TestBinaryTree, delete_nodeToDeleteHasNoChild)
+{
+	const std::vector<int> TEST_INPUT = {69, 55, 69, 49, 45, 75, 99, 75};
+	const std::vector<int> EXPECTED_OUTPUT = {69, 55, 75, 49, 69, 75, 99};
+	BinaryTree<int> binaryTree;
+
+	for(auto&& i : TEST_INPUT)
+		binaryTree.insert(i);
+
+	binaryTree.deleteNode(45);
+	const auto actualLevelOrderOutput = binaryTree.levelOrderTraversalWithRet();
+
+	ASSERT_EQ(EXPECTED_OUTPUT.size(), actualLevelOrderOutput.size());
+	for(auto i = 0u; i < actualLevelOrderOutput.size(); ++i)
+	{
+		EXPECT_EQ(EXPECTED_OUTPUT[i], actualLevelOrderOutput[i]);
+	}
+}
+
+TEST(TestBinaryTree, delete_nodeToDeleteHasOneLeftChild)
+{
+	const std::vector<int> TEST_INPUT = {69, 55, 69, 49, 45, 75, 99, 75, 100};
+	const std::vector<int> EXPECTED_OUTPUT_LEFT_CHILD_NOT_EMPTY = {69, 55, 75, 45, 69, 75, 99, 100};
+	
+	BinaryTree<int> binaryTree;
+
+	for(auto&& i : TEST_INPUT)
+		binaryTree.insert(i);
+
+	binaryTree.deleteNode(49);
+	const auto actualLevelOrderOutput = binaryTree.levelOrderTraversalWithRet();
+
+	ASSERT_EQ(EXPECTED_OUTPUT_LEFT_CHILD_NOT_EMPTY.size(), actualLevelOrderOutput.size());
+	for(auto i = 0u; i < actualLevelOrderOutput.size(); ++i)
+	{
+		EXPECT_EQ(EXPECTED_OUTPUT_LEFT_CHILD_NOT_EMPTY[i], actualLevelOrderOutput[i]);
+	}
+}
+
+TEST(TestBinaryTree, delete_nodeToDeleteHasOneRightChild)
+{
+	const std::vector<int> TEST_INPUT = {69, 55, 69, 49, 45, 75, 99, 75, 100};
+	const std::vector<int> EXPECTED_OUTPUT_RIGHT_CHILD_NOT_EMPTY = {69, 55, 75, 49, 69, 75, 100, 45};
+
+		BinaryTree<int> binaryTree;
+
+	for(auto&& i : TEST_INPUT)
+		binaryTree.insert(i);
+
+	binaryTree.deleteNode(99);
+	const auto actualLevelOrderOutput = binaryTree.levelOrderTraversalWithRet();
+
+	ASSERT_EQ(EXPECTED_OUTPUT_RIGHT_CHILD_NOT_EMPTY.size(), actualLevelOrderOutput.size());
+	for(auto i = 0u; i < actualLevelOrderOutput.size(); ++i)
+	{
+		EXPECT_EQ(EXPECTED_OUTPUT_RIGHT_CHILD_NOT_EMPTY[i], actualLevelOrderOutput[i]);
+	}
+}
+
+TEST(TestBinaryTree, delete_nodeToDeleteHasTwoChild)
+{
+	const std::vector<int> TEST_INPUT = {69, 55, 69, 2, 1, 45, 75, 99, 75, 43, 46, 42};
+	const std::vector<int> EXPECTED_OUTPUT = {69, 55, 75, 42, 69, 75, 99, 1, 45, 43, 46};
+	BinaryTree<int> binaryTree;
+
+	for(auto&& i : TEST_INPUT)
+		binaryTree.insert(i);
+
+	binaryTree.deleteNode(2);
+	const auto actualLevelOrderOutput = binaryTree.levelOrderTraversalWithRet();
+
+	ASSERT_EQ(EXPECTED_OUTPUT.size(), actualLevelOrderOutput.size());
+	for(auto i = 0u; i < actualLevelOrderOutput.size(); ++i)
+	{
+		EXPECT_EQ(EXPECTED_OUTPUT[i], actualLevelOrderOutput[i]);
+	}
+}

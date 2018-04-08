@@ -25,6 +25,9 @@ public:
 	// Insertion
 	Tree::Node<T>* insert(const T v);
 
+	// Deletion
+	void deleteNode(const T v);
+
 	// Traversals
 	std::vector<T> preOrderTraversalWithRet();
 	std::vector<T> postOrderTraversalWithRet();
@@ -50,6 +53,10 @@ public:
 protected:
 	// Insertion
 	void insert(Tree::Node<T>*& node, Tree::Node<T>* nodeToInsert);
+
+	// deleteNodeion
+	void deleteNode(Tree::Node<T>*& node, const T v);
+	Tree::Node<T>* minValueNode(Tree::Node<T>* node);
 
 	// Traversals
 	void preOrderTraversal(std::vector<T>& container, Tree::Node<T>* node);
@@ -469,4 +476,60 @@ void BinaryTree<T>::getMaxWidth(Tree::Node<T>* node, int count[], int level)
 	count[level++]++;
 	getMaxWidth(node->left, count, level);
 	getMaxWidth(node->right, count, level);
+}
+
+template<typename T>
+void BinaryTree<T>::deleteNode(const T v)
+{
+	if(nullptr != root)
+	{
+		deleteNode(root, v);
+	}
+}
+
+template<typename T>
+Tree::Node<T>* BinaryTree<T>::minValueNode(Tree::Node<T>* node)
+{
+	if(nullptr == node->left)
+	{
+		return node;
+	}
+
+	return minValueNode(node->left);
+}
+
+template<typename T>
+void BinaryTree<T>::deleteNode(Tree::Node<T>*& node, const T v)
+{
+	if(nullptr == node)
+		return;
+	
+	if(v < node->data)
+	{
+		deleteNode(node->left, v);
+	}
+	else if(v > node->data)
+	{
+		deleteNode(node->right, v);
+	}
+	else
+	{
+		auto nodeToDelete = node;
+		
+		if(nullptr == node->left)
+		{
+			node = node->right;
+			delete nodeToDelete;
+		}
+		else if(nullptr == node->right)
+		{
+			node = node->left;
+			delete nodeToDelete;
+		}
+		else
+		{
+			node->data = minValueNode(node->right)->data;
+			deleteNode(node->right, node->data);
+		}
+	}
 }
