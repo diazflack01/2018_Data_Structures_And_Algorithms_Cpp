@@ -13,6 +13,7 @@
 #include <BitManipulation/TestBitOperations.hpp>
 #include <Tree/TestBinaryTree.cpp>
 #include <Tree/TestAvlTree.cpp>
+#include <Tree/TestBinaryHeapTree.cpp>
 
 int main(int argc, char **argv)
 {
