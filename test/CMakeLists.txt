@@ -3,7 +3,6 @@ set(SRC_DIR "${PROJECT_SOURCE_DIR}/src")
 set(GTEST_INCLUDE_DIR "${EXTERNALS}/googletest/googltest/include")
 set(GMOCK_INCLUDE_DIR "${EXTERNALS}/googletest/googlmock/include")
 
-
 add_executable(algorithm_test
 	main.cpp
 	"${SRC_DIR}/SearchAlgo/LinearSearch.cpp"
@@ -26,6 +25,7 @@ target_include_directories(algorithm_test
 	${GMOCK_INCLUDE_DIR}
 	${SRC_DIR}
 	${PROJECT_SOURCE_DIR}/test
+	${SRC_DIR}/Utils
 	)
 
 add_test(Algorithm_Test algorithm_test)

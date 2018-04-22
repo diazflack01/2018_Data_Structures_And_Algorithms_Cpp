@@ -1,4 +1,5 @@
 #include "SelectionSort.hpp"
+#include <Utils.hpp>
 
 void SelectionSort::sort(unsigned arr[], const unsigned arrLen)
 {

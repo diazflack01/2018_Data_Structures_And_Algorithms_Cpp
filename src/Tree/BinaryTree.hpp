@@ -91,162 +91,62 @@ Tree::Node<T>* BinaryTree<T>::insert(const T v)
 {
 	auto newNode = new Tree::Node<T>({v, nullptr, nullptr});
 
-	if(nullptr == root)
-	{
-		root = newNode;
-	}
-	else
-	{
-		insert(root, newNode);	
-	}
-
 	return newNode;
 }
 
 template<typename T>
-void BinaryTree<T>::preOrderTraversal()
+void BinaryTree<T>::insert(Tree::Node<T>*& currentNode, Tree::Node<T>* nodeToInsert)
 {
-	if(nullptr != root)
-		preOrderTraversal(root);
-}
 
-template<typename T>
-void BinaryTree<T>::preOrderTraversal(Tree::Node<T>* node)
-{
-	if(nullptr != node)
-	{
-		std::cout << node->data << " ";
-		preOrderTraversal(node->left);
-		preOrderTraversal(node->right);
-	}
-	
 }
 
 template<typename T>
 std::vector<T> BinaryTree<T>::preOrderTraversalWithRet()
 {
 	std::vector<T> ret;
-	if(nullptr != root)
-	{
-		preOrderTraversal(ret, root);
-	}
+
 	return ret;
 }
 
 template<typename T>
 void BinaryTree<T>::preOrderTraversal(std::vector<T>& container, Tree::Node<T>* node)
 {
-	if(nullptr != node)
-	{
-		container.push_back(node->data);
-		preOrderTraversal(container, node->left);
-		preOrderTraversal(container, node->right);
-	}
-}
 
-template<typename T>
-void BinaryTree<T>::postOrderTraversal()
-{
-	if(nullptr != root)
-	{
-		postOrderTraversal(root);
-	}
-}
-
-template<typename T>
-void BinaryTree<T>::postOrderTraversal(Tree::Node<T>* node)
-{
-	if(nullptr != node)
-	{
-		postOrderTraversal(node->left);
-		postOrderTraversal(node->right);
-		std::cout << node->data << " ";
-	}
-	
 }
 
 template<typename T>
 std::vector<T> BinaryTree<T>::postOrderTraversalWithRet()
 {
 	std::vector<T> ret;
-	if(nullptr != root)
-	{
-		postOrderTraversal(ret, root);	
-	}
+
 	return ret;
 }
 
 template<typename T>
 void BinaryTree<T>::postOrderTraversal(std::vector<T>& container, Tree::Node<T>* node)
 {
-	if(nullptr != node)
-	{
-		postOrderTraversal(container, node->left);
-		postOrderTraversal(container, node->right);
-		container.push_back(node->data);
-	}
-}
 
-template<typename T>
-void BinaryTree<T>::inOrderTraversal()
-{
-	if(nullptr != root)
-		inOrderTraversal(root);
-}
-
-template<typename T>
-void BinaryTree<T>::inOrderTraversal(Tree::Node<T>* node)
-{
-	if(nullptr != node)
-	{
-		inOrderTraversal(node->left);
-		std::cout << node->data << " ";
-		inOrderTraversal(node->right);
-	}
 }
 
 template<typename T>
 std::vector<T> BinaryTree<T>::inOrderTraversalWithRet()
 {
 	std::vector<T> ret;
-	if(nullptr != root)
-	{
-		inOrderTraversal(ret, root);
-	}
+
 	return ret;
 }
 
 template<typename T>
 void BinaryTree<T>::inOrderTraversal(std::vector<T>& container, Tree::Node<T>* node)
 {
-	if(nullptr != node)
-	{
-		inOrderTraversal(container, node->left);
-		container.push_back(node->data);
-		inOrderTraversal(container, node->right);
-	}
+
 }
 
 template<typename T>
 std::vector<T> BinaryTree<T>::levelOrderTraversalWithRet()
 {
 	std::vector<T> ret;
-	std::queue<Tree::Node<T>*> queue;
-	queue.push(root);
 
-	while(!queue.empty())
-	{
-		auto node = queue.front();
-		queue.pop();
-		if(nullptr == node)
-		{
-			continue;
-		}
-
-		ret.push_back(node->data);
-		queue.push(node->left);
-		queue.push(node->right);
-	}
 	return ret;
 }
 
@@ -254,23 +154,6 @@ template<typename T>
 Tree::Node<T>* BinaryTree<T>::getRootNode() const
 {
 	return root;
-}
-
-template<typename T>
-void BinaryTree<T>::insert(Tree::Node<T>*& currentNode, Tree::Node<T>* nodeToInsert)
-{
-	if(nullptr == currentNode)
-	{
-		currentNode = nodeToInsert;
-	}
-	else if(nodeToInsert->data <= currentNode->data)
-	{
-		insert(currentNode->left, nodeToInsert);
-	}
-	else
-	{
-		insert(currentNode->right, nodeToInsert);
-	}
 }
 
 template<typename T>
@@ -298,7 +181,7 @@ Tree::Node<T>* BinaryTree<T>::recursiveSearch(Tree::Node<T>* node, const T v)
 		{
 			match = recursiveSearch(node->right, v);
 		}
-		else if(node->data > v)
+		else
 		{
 			match = recursiveSearch(node->left, v);
 		}
@@ -516,14 +399,9 @@ void BinaryTree<T>::deleteNode(Tree::Node<T>*& node, const T v)
 	{
 		auto nodeToDelete = node;
 		
-		if(nullptr == node->left)
+		if(nullptr == node->left || nullptr == node->right)
 		{
-			node = node->right;
-			delete nodeToDelete;
-		}
-		else if(nullptr == node->right)
-		{
-			node = node->left;
+			node = (nullptr == node->left) ? node->right : node->left;
 			delete nodeToDelete;
 		}
 		else

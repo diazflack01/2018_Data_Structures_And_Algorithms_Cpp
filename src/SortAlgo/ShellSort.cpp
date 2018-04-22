@@ -1,4 +1,5 @@
 #include "ShellSort.hpp"
+#include <Utils.hpp>
 
 void ShellSort::sort(unsigned arr[], const unsigned arrLen /*endIndex + 1*/)
 {
