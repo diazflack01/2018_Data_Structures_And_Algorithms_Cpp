@@ -153,34 +153,13 @@ Tree::Node<T>* BinaryTree<T>::getRootNode() const
 template<typename T>
 Tree::Node<T>* BinaryTree<T>::search(const T v)
 {
-	Tree::Node<T>* ret = nullptr;
-	if(nullptr != root)
-	{
-		ret = recursiveSearch(root, v);
-	}
-	return ret;
+	return nullptr;
 }
 
 template<typename T>
 Tree::Node<T>* BinaryTree<T>::recursiveSearch(Tree::Node<T>* node, const T v)
 {
-	Tree::Node<T>* match = nullptr;
-	if(nullptr != node)
-	{
-		if(node->data == v)
-		{
-			match = node;
-		}
-		else if(node->data < v)
-		{
-			match = recursiveSearch(node->right, v);
-		}
-		else
-		{
-			match = recursiveSearch(node->left, v);
-		}
-	}
-	return match;
+
 }
 
 template<typename T>
