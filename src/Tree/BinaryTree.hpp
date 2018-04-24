@@ -33,9 +33,6 @@ public:
 	std::vector<T> postOrderTraversalWithRet();
 	std::vector<T> inOrderTraversalWithRet();
 	std::vector<T> levelOrderTraversalWithRet();
-	void preOrderTraversal();
-	void postOrderTraversal();
-	void inOrderTraversal();
 
 	// Search
 	Tree::Node<T>* search(const T v);
@@ -62,9 +59,6 @@ protected:
 	void preOrderTraversal(std::vector<T>& container, Tree::Node<T>* node);
 	void postOrderTraversal(std::vector<T>& container, Tree::Node<T>* node);
 	void inOrderTraversal(std::vector<T>& container, Tree::Node<T>* node);
-	void preOrderTraversal(Tree::Node<T>* node);
-	void postOrderTraversal(Tree::Node<T>* node);
-	void inOrderTraversal(Tree::Node<T>* node);
 
 	// Search
 	Tree::Node<T>* recursiveSearch(Tree::Node<T>* node, const T v);
@@ -364,50 +358,17 @@ void BinaryTree<T>::getMaxWidth(Tree::Node<T>* node, int count[], int level)
 template<typename T>
 void BinaryTree<T>::deleteNode(const T v)
 {
-	if(nullptr != root)
-	{
-		deleteNode(root, v);
-	}
+
 }
 
 template<typename T>
 Tree::Node<T>* BinaryTree<T>::minValueNode(Tree::Node<T>* node)
 {
-	if(nullptr == node->left)
-	{
-		return node;
-	}
 
-	return minValueNode(node->left);
 }
 
 template<typename T>
 void BinaryTree<T>::deleteNode(Tree::Node<T>*& node, const T v)
 {
-	if(nullptr == node)
-		return;
-	
-	if(v < node->data)
-	{
-		deleteNode(node->left, v);
-	}
-	else if(v > node->data)
-	{
-		deleteNode(node->right, v);
-	}
-	else
-	{
-		auto nodeToDelete = node;
-		
-		if(nullptr == node->left || nullptr == node->right)
-		{
-			node = (nullptr == node->left) ? node->right : node->left;
-			delete nodeToDelete;
-		}
-		else
-		{
-			node->data = minValueNode(node->right)->data;
-			deleteNode(node->right, node->data);
-		}
-	}
+
 }
