@@ -14,6 +14,7 @@
 #include <Tree/TestBinaryTree.cpp>
 #include <Tree/TestAvlTree.cpp>
 #include <Tree/TestBinaryHeapTree.cpp>
+#include <Graph/TestGraph.cpp>
 
 int main(int argc, char **argv)
 {
